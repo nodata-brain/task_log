@@ -2,30 +2,21 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
+	"io/ioutil"
 )
 
 func main() {
 
 	//コマンドラインのオプションを取得する
-	time := flag.Int("t", 0, "task_time")
-	task := flag.String("l", "Other" ,"task_type")
+	//time := flag.Int("t", 0, "task_time")
+	task := flag.String("l", "Other", "task_type")
 	flag.Parse()
 
-	//ファイルを開く
-	//todo:ファイル名可変にする
-	fp, err := os.Open("task.txt")
+	//file書き込み
+	err := ioutil.WriteFile("task.txt", []byte(*task), 0755)
 
 	if err != nil {
 		panic(err)
 	}
-
-	//開いたファイルを閉じる
-	defer fp.Close()
-
-	//タスクと時間を出力
-	fmt.Println(*time)
-	fmt.Println(*task)
 
 }
