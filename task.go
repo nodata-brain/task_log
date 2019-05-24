@@ -20,6 +20,13 @@ func main() {
 
 	new_task := append(read_task, *task...)
 
+	//現在時刻取得
+	t := time.Now()
+	const layout = "2006-01-02"
+
+	//表記を変換
+	t.Format(layout)
+
 	//file書き込み
 	file_err := ioutil.WriteFile("task.txt", new_task, 0755)
 
